@@ -1,79 +1,16 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
-import { useWheelResultStore } from '@/stores/wheelResult'
-import router from '@/router'
-
-const wheelResultStore = useWheelResultStore()
-
-// given the segment's index, calculate its CSS transformation property (i.e. rotation)
-const calculateSegmentTransformation = (index: number) => {
-  const rotation = (index - 1) * 45
-
-  return `rotate(${rotation})`
-}
-
-// given the segment's index, get its fill color
-const getSegmentClass = (index: number) => {
-  const segmentColorClass = (index % 3) + 1
-
-  return `spinner-segment segment-${segmentColorClass}/3`
-}
-
-// given the segment's index, calculate the text's CSS transformation property value
-const calculateTextTransformation = (index: number) => {
-  const rotation = (index - 1) * 45 + 22.5
-
-  return `rotate(${rotation}) translate(0, -70) rotate(-${rotation})`
-}
-
-// calculate the segment's path:
-// it starts at (0,0), creates a line, an short arc, and then a line back to (0,0)
-const segmentLength = 100
-const segmentArcAngleRadians = (45 * Math.PI) / 180
-const segmentArcEndX = segmentLength * Math.cos(segmentArcAngleRadians)
-const segmentArcEndY = segmentLength * Math.sin(segmentArcAngleRadians)
-const segmentPath = `M 0,0
-  L ${segmentLength},0
-  A ${segmentLength},${segmentLength} 0 0,1 ${segmentArcEndX},${segmentArcEndY}
-Z`
+import { useSpinningWheel } from '@/composables/useSpinningWheel'
+import {
+  calculateSegmentTransformation,
+  getSegmentClassName,
+  calculateTextTransformation,
+  segmentPath,
+} from '@/utils/wheelUtils'
 
 const wheel = useTemplateRef('spinner-wheel')
 
-// always spin 10 full circles to create a "spinning effect"
-const spinEffectDegrees = 360 * 10
-
-const getSegmentDegrees = (segment: number) => {
-  return 360 + 22.5 - segment * 45
-}
-
-const getRandomSpinDegrees = () => {
-  const randomNumber = Math.random()
-  const randomSegment = Math.floor(randomNumber * 8) + 1
-  const randomRotationDegrees = spinEffectDegrees + getSegmentDegrees(randomSegment)
-
-  wheelResultStore.result = randomSegment
-
-  return randomRotationDegrees
-}
-
-const getPredeterminedSpinDegrees = () => {
-  const predeterminedSegment = 3
-  const predeterminedRotationDegrees = spinEffectDegrees + getSegmentDegrees(predeterminedSegment)
-
-  wheelResultStore.result = predeterminedSegment
-
-  return predeterminedRotationDegrees
-}
-
-const spin = (degrees: number) => {
-  if (wheel.value) {
-    wheel.value.style.transform = `rotate(${degrees}deg)`
-
-    setTimeout(() => {
-      router.push('/result')
-    }, 5250)
-  }
-}
+const { spinRandom, spinPredetermined } = useSpinningWheel(5000, wheel)
 </script>
 
 <template>
@@ -112,7 +49,7 @@ const spin = (degrees: number) => {
           xlink:href="#segment"
           v-for="i in 8"
           :key="i"
-          :class="getSegmentClass(i)"
+          :class="getSegmentClassName(i)"
           :transform="calculateSegmentTransformation(i)"
         />
 
@@ -133,10 +70,10 @@ const spin = (degrees: number) => {
     </svg>
   </div>
   <div class="button-group">
-    <button class="button button-secondary" @click="spin(getPredeterminedSpinDegrees())">
+    <button class="button button-secondary" @click="spinPredetermined(3)">
       Predetermined spin
     </button>
-    <button class="button button-primary" @click="spin(getRandomSpinDegrees())">Random spin</button>
+    <button class="button button-primary" @click="spinRandom">Random spin</button>
   </div>
 </template>
 
