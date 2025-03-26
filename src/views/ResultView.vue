@@ -10,10 +10,10 @@ const wheelResultStore = useWheelResultStore()
 // redirect to the welcome page
 if (!wheelResultStore.result) {
   router.push('/')
+} else {
+  // show some confetti when the results page has loaded (uses canvas-confetti library)
+  confetti()
 }
-
-// show some confetti when the results page has loaded (uses canvas-confetti library)
-confetti()
 </script>
 
 <template>
