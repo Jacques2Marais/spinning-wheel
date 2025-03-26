@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
+import { useWheelResultStore } from '@/stores/wheelResult'
+import router from '@/router'
+
+const wheelResultStore = useWheelResultStore()
 
 // given the segment's index, calculate its CSS transformation property (i.e. rotation)
 const calculateSegmentTransformation = (index: number) => {
@@ -38,17 +42,25 @@ const wheel = useTemplateRef('spinner-wheel')
 // always spin 10 full circles to create a "spinning effect"
 const spinEffectDegrees = 360 * 10
 
+const getSegmentDegrees = (segment: number) => {
+  return 360 + 22.5 - segment * 45
+}
+
 const getRandomSpinDegrees = () => {
   const randomNumber = Math.random()
   const randomSegment = Math.floor(randomNumber * 8) + 1
-  const randomRotationDegrees = spinEffectDegrees + (randomSegment - 1) * 45 + 22.5
+  const randomRotationDegrees = spinEffectDegrees + getSegmentDegrees(randomSegment)
+
+  wheelResultStore.result = randomSegment
 
   return randomRotationDegrees
 }
 
 const getPredeterminedSpinDegrees = () => {
   const predeterminedSegment = 3
-  const predeterminedRotationDegrees = spinEffectDegrees + (360 + 22.5 - predeterminedSegment * 45)
+  const predeterminedRotationDegrees = spinEffectDegrees + getSegmentDegrees(predeterminedSegment)
+
+  wheelResultStore.result = predeterminedSegment
 
   return predeterminedRotationDegrees
 }
@@ -56,6 +68,10 @@ const getPredeterminedSpinDegrees = () => {
 const spin = (degrees: number) => {
   if (wheel.value) {
     wheel.value.style.transform = `rotate(${degrees}deg)`
+
+    setTimeout(() => {
+      router.push('/result')
+    }, 5250)
   }
 }
 </script>
