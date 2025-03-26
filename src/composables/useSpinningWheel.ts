@@ -3,6 +3,7 @@ import type { Ref } from 'vue'
 import { useWheelResultStore } from '@/stores/wheelResult'
 import { getSegmentDegrees } from '@/utils/wheelUtils'
 
+// a composable that returns functions to help with spinning of the wheel
 export const useSpinningWheel = (animationMs: number, wheelElement: Ref<SVGSVGElement | null>) => {
   const wheelResultStore = useWheelResultStore()
 

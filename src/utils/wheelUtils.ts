@@ -1,4 +1,4 @@
-// calculate the degrees (to the center point) of a segment from its number
+// calculate the degrees (to the center point) around the wheel of a segment, given its number
 export const getSegmentDegrees = (segment: number) => {
   return 360 + 22.5 - segment * 45
 }
