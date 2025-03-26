@@ -145,51 +145,51 @@ const { spinRandom, spinPredetermined } = useSpinningWheel(5000, wheel)
 
 #middle-gradient {
   .gradient-stop-1 {
-    stop-color: #5747c2;
+    stop-color: var(--wheel-gradient-purple-stop-1);
   }
 
   .gradient-stop-2 {
-    stop-color: #351f78;
+    stop-color: var(--wheel-gradient-purple-stop-2);
   }
 }
 
 #arrow-gradient {
   .gradient-stop-1 {
-    stop-color: #3c3a3a;
+    stop-color: var(--wheel-gradient-grey-stop-1);
   }
 
   .gradient-stop-2 {
-    stop-color: #181717;
+    stop-color: var(--wheel-gradient-grey-stop-2);
   }
 }
 
 #segment-gradient-1 {
   .gradient-stop-1 {
-    stop-color: #5846c8;
+    stop-color: var(--wheel-gradient-purple-stop-1);
   }
 
   .gradient-stop-2 {
-    stop-color: #382082;
+    stop-color: var(--wheel-gradient-purple-stop-2);
   }
 }
 
 #segment-gradient-2 {
   .gradient-stop-1 {
-    stop-color: #df9f29;
+    stop-color: var(--wheel-gradient-yellow-stop-1);
   }
 
   .gradient-stop-2 {
-    stop-color: #a26c16;
+    stop-color: var(--wheel-gradient-yellow-stop-2);
   }
 }
 
 #segment-gradient-3 {
   .gradient-stop-1 {
-    stop-color: #e03246;
+    stop-color: var(--wheel-gradient-red-stop-1);
   }
 
   .gradient-stop-2 {
-    stop-color: #941a28;
+    stop-color: var(--wheel-gradient-red-stop-2);
   }
 }
 </style>

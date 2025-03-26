@@ -1,39 +1,13 @@
-# spinning-wheel
+# Spin the wheel
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a simple implementation of the spin-the-wheel game. It consists of three pages: a welcome page, a spin page and a result page.
 
-## Recommended IDE Setup
+The welcome page welcomes the user and has a link button to the spin page. On the spin page, the user can either choose to spin to a random segment or to a pre-determined (the 3rd in this case) segment. The wheel then spins using CSS transitions (and some JavaScript background logic), and upon completion the user is directed to the results page. On the results page, the number of the segment that the spin landed on is displayed, and the user can click back to the welcome page.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Implementation
 
-## Type Support for `.vue` Imports in TS
+Vue was used to implement the web app, with Vue Router for routing, Pinia for global state management and vanilla Vue, TypeScript, CSS and HTML for the rest. A small additional library was used to display a confetti effect on the results page ([canvas-confetti](https://github.com/catdad/canvas-confetti?tab=readme-ov-file)).
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+To keep things modular, different files were created for utils, composables, and CSS variables were used for colours. This allows for quick theme customization. The spinner wheel was also implemented using custom SVG and CSS.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+For the spinning animation, 10 initial spins are done to give off a visual spinning effect, and the rest of the spin's angle in degrees is calculated according to the segment number. The JavaScript `Math.random` is used to calculate the segment number for a random spin.

@@ -17,5 +17,13 @@
 
   --copy: #242329;
   --copy-light: #393741;
-  --copy-lighter: #868495;
+
+  --wheel-gradient-purple-stop-1: #5747c2;
+  --wheel-gradient-purple-stop-2: #351f78;
+  --wheel-gradient-yellow-stop-1: #df9f29;
+  --wheel-gradient-yellow-stop-2: #a26c16;
+  --wheel-gradient-red-stop-1: #e03246;
+  --wheel-gradient-red-stop-2: #941a28;
+  --wheel-gradient-grey-stop-1: #3c3a3a;
+  --wheel-gradient-grey-stop-2: #181717;
 }
