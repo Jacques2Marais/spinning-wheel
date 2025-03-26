@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import router from '@/router'
+import confetti from 'canvas-confetti'
 import BaseLayout from '@/components/BaseLayout.vue'
 import { useWheelResultStore } from '@/stores/wheelResult'
 
@@ -10,6 +11,9 @@ const wheelResultStore = useWheelResultStore()
 if (!wheelResultStore.result) {
   router.push('/')
 }
+
+// show some confetti when the results page has loaded (uses canvas-confetti library)
+confetti()
 </script>
 
 <template>
