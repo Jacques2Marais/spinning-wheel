@@ -21,6 +21,6 @@ if (!wheelResultStore.result) {
     :title="`Your spin landed on ${wheelResultStore.result}!`"
     desc="Congratulations! Click the button below to start again"
   >
-    <a href="/" class="button button-primary">Start again</a>
+    <router-link to="/" class="button button-primary">Start again</router-link>
   </BaseLayout>
 </template>

@@ -4,6 +4,6 @@ import BaseLayout from '@/components/BaseLayout.vue'
 
 <template>
   <BaseLayout title="Spin the wheel" desc="Click on the button below to get started">
-    <a href="/spin" class="button button-primary">Get started</a>
+    <router-link to="/spin" class="button button-primary">Get started</router-link>
   </BaseLayout>
 </template>

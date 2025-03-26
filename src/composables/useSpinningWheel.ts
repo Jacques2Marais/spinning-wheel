@@ -1,7 +1,7 @@
 import router from '@/router'
 import type { Ref } from 'vue'
 import { useWheelResultStore } from '@/stores/wheelResult'
-import { getSegmentDegrees } from '@/utils/wheelUtils'
+import { calculateWheelRotationToSegment } from '@/utils/wheelUtils'
 
 // a composable that returns functions to help with spinning of the wheel
 export const useSpinningWheel = (animationMs: number, wheelElement: Ref<SVGSVGElement | null>) => {
@@ -11,7 +11,7 @@ export const useSpinningWheel = (animationMs: number, wheelElement: Ref<SVGSVGEl
   const spin = (segment: number) => {
     // spin 10 extra full circles for visual effect
     const spinEffectDegrees = 360 * 10
-    const degrees = getSegmentDegrees(segment) + spinEffectDegrees
+    const degrees = calculateWheelRotationToSegment(segment) + spinEffectDegrees
 
     if (wheelElement.value) {
       wheelElement.value.style.transform = `rotate(${degrees}deg)`
@@ -21,6 +21,8 @@ export const useSpinningWheel = (animationMs: number, wheelElement: Ref<SVGSVGEl
       setTimeout(() => {
         router.push('/result')
       }, animationMs + 200)
+    } else {
+      console.error('Wheel <svg> element could not be found')
     }
   }
 

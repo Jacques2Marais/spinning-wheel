@@ -1,5 +1,5 @@
 // calculate the degrees (to the center point) around the wheel of a segment, given its number
-export const getSegmentDegrees = (segment: number) => {
+export const calculateWheelRotationToSegment = (segment: number) => {
   return 360 + 22.5 - segment * 45
 }
 
@@ -10,9 +10,9 @@ export const calculateSegmentTransformation = (index: number) => {
 }
 
 // given a wheel segment's index, get its class name
-export const getSegmentClassName = (index: number) => {
-  const segmentColorClass = (index % 3) + 1
-  return `spinner-segment segment-${segmentColorClass}/3`
+export const calculateSegmentColourClassName = (index: number) => {
+  const segmentColourClass = (index % 3) + 1
+  return `segment-${segmentColourClass}/3`
 }
 
 // given a wheel segment's index, calculate the text's CSS transformation property value

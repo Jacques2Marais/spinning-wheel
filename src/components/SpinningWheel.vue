@@ -3,7 +3,7 @@ import { useTemplateRef } from 'vue'
 import { useSpinningWheel } from '@/composables/useSpinningWheel'
 import {
   calculateSegmentTransformation,
-  getSegmentClassName,
+  calculateSegmentColourClassName,
   calculateTextTransformation,
   segmentPath,
 } from '@/utils/wheelUtils'
@@ -15,11 +15,11 @@ const { spinRandom, spinPredetermined } = useSpinningWheel(5000, wheel)
 
 <template>
   <div class="wheel-container">
-    <svg width="40" viewBox="0 0 30 30" class="spinner-arrow">
+    <svg viewBox="0 0 30 30" class="spinner-arrow">
       <polygon points="28,2 2,2 15,28" />
     </svg>
 
-    <svg width="300" height="300" viewBox="-2 -2 204 204" class="spinner-wheel" ref="spinner-wheel">
+    <svg viewBox="-2 -2 204 204" class="spinner-wheel" ref="spinner-wheel">
       <defs>
         <path id="segment" :d="segmentPath" />
 
@@ -38,6 +38,11 @@ const { spinRandom, spinPredetermined } = useSpinningWheel(5000, wheel)
           <stop class="gradient-stop-2" offset="100%" />
         </linearGradient>
 
+        <linearGradient id="arrow-gradient" gradientTransform="rotate(30)">
+          <stop class="gradient-stop-1" offset="0%" />
+          <stop class="gradient-stop-2" offset="100%" />
+        </linearGradient>
+
         <radialGradient id="middle-gradient">
           <stop class="gradient-stop-1" offset="0%" />
           <stop class="gradient-stop-2" offset="100%" />
@@ -49,7 +54,7 @@ const { spinRandom, spinPredetermined } = useSpinningWheel(5000, wheel)
           xlink:href="#segment"
           v-for="i in 8"
           :key="i"
-          :class="getSegmentClassName(i)"
+          :class="`spinner-segment ${calculateSegmentColourClassName(i)}`"
           :transform="calculateSegmentTransformation(i)"
         />
 
@@ -88,28 +93,32 @@ const { spinRandom, spinPredetermined } = useSpinningWheel(5000, wheel)
   transition: transform 5s cubic-bezier(0.3, 0.1, 0.25, 1);
   transform-origin: 50% 50%;
   transform: rotate(0);
+
+  width: 300px;
+  height: 300px;
 }
 
 .spinner-arrow {
-  fill: var(--foreground);
+  fill: url(#arrow-gradient);
   translate: 0 0.75rem;
-  stroke: var(--foreground);
-  stroke-width: 4;
+  stroke: var(--background);
+  stroke-width: 2;
   stroke-linejoin: round;
 
   z-index: 1;
+  width: 40px;
 }
 
 .spinner-text {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   fill: var(--background);
 }
 
 .spinner-segment {
   fill: url(#segment-gradient-1);
   stroke: var(--background);
-  stroke-width: 4;
+  stroke-width: 2;
   stroke-linejoin: round;
 
   &.segment-1\/3 {
@@ -130,47 +139,57 @@ const { spinRandom, spinPredetermined } = useSpinningWheel(5000, wheel)
 .spinner-middle {
   fill: url(#middle-gradient);
   stroke: var(--background);
-  stroke-width: 4;
+  stroke-width: 2;
   stroke-linejoin: round;
 }
 
 #middle-gradient {
   .gradient-stop-1 {
-    stop-color: rgb(238, 184, 85);
+    stop-color: #5747c2;
   }
 
   .gradient-stop-2 {
-    stop-color: rgb(255, 217, 0);
+    stop-color: #351f78;
+  }
+}
+
+#arrow-gradient {
+  .gradient-stop-1 {
+    stop-color: #3c3a3a;
+  }
+
+  .gradient-stop-2 {
+    stop-color: #181717;
   }
 }
 
 #segment-gradient-1 {
   .gradient-stop-1 {
-    stop-color: #e56;
+    stop-color: #5846c8;
   }
 
   .gradient-stop-2 {
-    stop-color: #f90;
+    stop-color: #382082;
   }
 }
 
 #segment-gradient-2 {
   .gradient-stop-1 {
-    stop-color: #56e;
+    stop-color: #df9f29;
   }
 
   .gradient-stop-2 {
-    stop-color: #0f9;
+    stop-color: #a26c16;
   }
 }
 
 #segment-gradient-3 {
   .gradient-stop-1 {
-    stop-color: #6e5;
+    stop-color: #e03246;
   }
 
   .gradient-stop-2 {
-    stop-color: #90f;
+    stop-color: #941a28;
   }
 }
 </style>
