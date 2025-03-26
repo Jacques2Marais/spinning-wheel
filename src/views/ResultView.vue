@@ -1,9 +1,12 @@
+<script setup lang="ts">
+import BaseLayout from '@/components/BaseLayout.vue'
+</script>
+
 <template>
-  <section class="hero">
-    <div class="hero-text">
-      <h1 class="h-title">Your spin landed on 2</h1>
-      <p class="p-text">Congratulations! Click the button below to start again.</p>
-    </div>
+  <BaseLayout
+    title="Your spin landed on 2"
+    desc="Congratulations! Click the button below to start again"
+  >
     <a href="/" class="button button-primary">Start again</a>
-  </section>
+  </BaseLayout>
 </template>

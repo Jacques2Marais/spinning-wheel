@@ -1,2 +1,28 @@
 :root {
+  --primary: #382a94;
+  --primary-dark: #2a2070;
+  --primary-darkest: #21124f;
+  --primary-contrast: #e8e4fc;
+  --primary-light: #9b94cc;
+  --primary-lightest: rgb(188, 183, 221);
+
+  --secondary: #c9c8d4;
+  --secondary-dark: #b5b4c0;
+  --secondary-darkest: #92929d;
+  --secondary-contrast: #303032;
+
+  --background: #efeff1;
+  --foreground: #3c3a3a;
+  --border: #dddde2;
+
+  --copy: #242329;
+  --copy-light: #393741;
+  --copy-lighter: #868495;
+
+  --success: #2a942a;
+  --warning: #94942a;
+  --error: #942a2a;
+  --success-content: #ccf1cc;
+  --warning-content: #000000;
+  --error-content: #f1cccc;
 }
